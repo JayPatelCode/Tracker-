@@ -1,9 +1,9 @@
 
-let myLeads=[]
+ let myLeads=[]
 
-const inputEl = document.getElementById("input-el")
-const buttonEl=document.getElementById("input-button")
-const ulEl =document.getElementById("ul-el")
+ const inputEl = document.getElementById("input-el")
+ const buttonEl=document.getElementById("input-button")
+ const ulEl =document.getElementById("ul-el")
  const deleteBtn=document.getElementById("delete-button")
  const leadsFromLocalStorage=JSON.parse(localStorage.getItem("myLeads"))
  const tabBtn=document.getElementById("save-tab")
@@ -13,29 +13,17 @@ const ulEl =document.getElementById("ul-el")
         myLeads=leadsFromLocalStorage
         render(myLeads)
      }   
-
-    
-      
-     // tabBtn.addEventListener("click", function(){
-     //      chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-               
-     //      myLeads.push(tabs[0].URL) 
-     //      localStorage.setItem("myLeads", JSON.stringify(myLeads)) 
-     //      render(myLeads)
-               
-     //      })
-     // })
-     tabBtn.addEventListener("click", function(){    
-          chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
-              myLeads.push(tabs[0].url)  //url must be small
-              localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+  tabBtn.addEventListener("click", function(){    
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        myLeads.push(tabs[0].url)  //url must be small
+        localStorage.setItem("myLeads", JSON.stringify(myLeads) )
               render(myLeads)
           })
       })
 
-     function render(Leads){
-          let item="" //next best way
-          for(let i=0; i<Leads.length; i++){ //next best way
+  function render(Leads){
+  let item="" //next best way
+  for(let i=0; i<Leads.length; i++){ //next best way
             
             item+= `<li> 
               <a target='_blank' href=' ${Leads[i]}' >  
@@ -49,11 +37,11 @@ const ulEl =document.getElementById("ul-el")
           
          
      
-     deleteBtn.addEventListener("dblclick",function(){
-     console.log("double clicked");
-     localStorage.clear()
-     myLeads=[]
-     render(myLeads)
+   deleteBtn.addEventListener("dblclick",function(){
+   console.log("double clicked");
+   localStorage.clear()
+   myLeads=[]
+   render(myLeads)
      })
 
     buttonEl.addEventListener('click',function(){ //when button is clicked this event will fire
